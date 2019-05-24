@@ -1,0 +1,17 @@
+wget http://www.linuxidc.com/files/repo/google-chrome.list -P /etc/apt/sources.list.d/
+wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+sudo apt-get update
+apt-get install google-chrome-stable
+
+ google-chrome --version
+google-chrome --headless 
+
+wget http://chromedriver.storage.googleapis.com/74.0.3729.6/chromedriver_linux64.zip
+unzip chromedriver_linux64.zip 
+cp chromedriver /usr/bin/
+
+ apt-get install xfonts-wqy
+apt-get install fonts-droid ttf-wqy-zenhei ttf-wqy-microhei fonts-arphic-ukai fonts-arphic-uming
+cd /etc/fonts/conf.d/ sudo ln -s /etc/fonts/conf.avail/69-language-selector-zh-cn.conf
+ fc-cache -f -v
+
