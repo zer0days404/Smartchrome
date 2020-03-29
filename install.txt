@@ -1,17 +1,23 @@
+#安装google-chrome
 wget http://www.linuxidc.com/files/repo/google-chrome.list -P /etc/apt/sources.list.d/
 wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 sudo apt-get update
 apt-get install google-chrome-stable
+google-chrome --version
 
- google-chrome --version
-google-chrome --headless 
-
-wget http://chromedriver.storage.googleapis.com/74.0.3729.6/chromedriver_linux64.zip
+#安装chromedriver
+#进入http://chromedriver.storage.googleapis.com/index.html 找和google-chrome匹配的chromedriver版本
+wget http://chromedriver.storage.googleapis.com/xxxx/chromedriver_linux64.zip
 unzip chromedriver_linux64.zip 
 cp chromedriver /usr/bin/
 
- apt-get install xfonts-wqy
+#安装字体
+apt-get install xfonts-wqy
 apt-get install fonts-droid ttf-wqy-zenhei ttf-wqy-microhei fonts-arphic-ukai fonts-arphic-uming
 cd /etc/fonts/conf.d/ sudo ln -s /etc/fonts/conf.avail/69-language-selector-zh-cn.conf
- fc-cache -f -v
+fc-cache -f -v
+
+#安装Xvfb
+sudo apt-get install Xvfb
+pip install xvfbwrapper
 

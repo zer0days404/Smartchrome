@@ -4,7 +4,6 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from pyvirtualdisplay import Display
 from fake_useragent import UserAgent
-#from xvfbwrapper import Xvfb
 
 import bs4, os, re, time, zipfile
 from base64 import b64encode
@@ -16,10 +15,10 @@ from posix import unlink
 class Smartchrome():
     def __init__(self,proxy_enable=True,headers=None):
         proxy = {
-            "host":"http-dyn.abuyun.com", 
-            "port":"9020",
-            "user":"H6H6PZWW58Q884CD",
-            "passwd":"5E0785B98FC96F8B",
+            "host":"forward.apeyun.com", 
+            "port":"9082",
+            "user":"1910280004560115928",
+            "passwd":"OwuEZGXHXPA0PsW1",
             "number":5
              }
         self.driver = None
@@ -71,8 +70,8 @@ class Smartchrome():
             raise Exception('Invalid proxy format. Should be username:password@ip:port')
 
     def open_driver(self):
-        #self.display = Display(visible=0, size=(800, 600))
-        #self.display.start()
+        self.display = Display(visible=0, size=(800, 600))
+        self.display.start()
         try:
             proxy = self.proxy_meta 
             proxy_zip = self.get_chrome_proxy_extension()# 打包代理zip文件
@@ -80,6 +79,10 @@ class Smartchrome():
             chrome_options.add_extension(proxy_zip)
             # 隐藏"Chrome正在受到自动软件的控制"
             chrome_options.add_argument('disable-infobars')
+            chrome_options.add_argument("start-maximized")
+            chrome_options.add_argument('--disable-gpu')
+            chrome_options.add_argument("--no-sandbox")
+            chrome_options.add_argument("--disable-dev-shm-usage") 
             # 设置selenium不加载图片，提高爬取效率
             #prefs = {"profile.managed_default_content_settings.images": 2}
             #options.add_experimental_option("prefs", prefs)
@@ -107,5 +110,6 @@ if __name__ == '__main__':
     sc.open_driver()
     url2 = "http://cip.cc"
     sc.driver.get(url2)
-    time.sleep(10)
+    page = sc.driver.page_source
+    print(page)
     sc.close_driver()
